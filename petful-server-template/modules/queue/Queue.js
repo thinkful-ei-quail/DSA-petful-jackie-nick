@@ -36,22 +36,21 @@ class Queue {
     if (node === this.last) {
       this.last = null;
     }
-    return node.value;
+    return node.data;
   }
 
-  show() {
+  show(queue) {
     // Return the next item in the queue.
-    if(this.stack1.length > 0) {
-      return this.stack1[0]
-    }
-    return this.stack2[this.stack2.length -1]
+    return this.first.data
   }
   
-  all() {
+  all(queue) {
     // Return all items in the queue.
     let array = []
-    array.push(this._items.toString())
+    array.push(this.queue.toString())
     return array
+    // console.log(this.data)
+    // return this.data
   }
 }
 

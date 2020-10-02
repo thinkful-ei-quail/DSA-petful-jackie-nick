@@ -12,6 +12,9 @@ store.people.forEach(person => people.enqueue(person))
 module.exports = {
   get() {
     // Return all people in the queue.
+    console.log(people)
+    return people.all()
+
   },
   enqueue(person) {
     // Add a person to the queue.
