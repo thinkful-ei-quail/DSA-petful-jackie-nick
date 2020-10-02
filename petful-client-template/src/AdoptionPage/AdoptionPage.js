@@ -1,35 +1,23 @@
 import React, { Component } from "react";
 import Users from "../Users/Users"
 import Adopt from "../Adopt/Adopt"
-import dogsApiService from "../Services/dogs-service";
-import catsApiService from "../Services/cats-service";
+import petsApiService from "../Services/pets-service";
 import usersApiService from "../Services/users-service";
 
 export default class AdoptionPage extends Component {
   state = {
-    cats: [],
-    dogs: [],
+    pets: [],
     users: [],
     user: {},
     error: {},
   };
 
   componentDidMount() {
-    dogsApiService
-      .getDogs()
+    petsApiService
+      .getPets()
       .then((res) => {
         this.setState({
-          dogs: res,
-        });
-      })
-      .catch((res) => {
-        this.setState({ error: res.message });
-      });
-    catsApiService
-      .getCats()
-      .then((res) => {
-        this.setState({
-          cats: res,
+          pets: res,
         });
       })
       .catch((res) => this.setState({ error: res.message }));
@@ -54,29 +42,19 @@ export default class AdoptionPage extends Component {
       });
     });
   }
-
-  deleteDog = () => {
-    dogsApiService.deleteDogs();
-    let updatedDogs = [...this.state.dogs];
-    updatedDogs.shift();
+  deletePet = () => {
+    petsApiService.deletePets();
+    let updatedPets = [...this.state.Pets];
+    updatedPets.shift();
     this.updateUser();
     this.setState({
-      dogs: updatedDogs,
-    });
-  };
-  deleteCat = () => {
-    catsApiService.deleteCats();
-    let updatedCats = [...this.state.cats];
-    updatedCats.shift();
-    this.updateUser();
-    this.setState({
-      cats: updatedCats,
+      pets: updatedPets,
     });
   };
 
   render() {
-    const { dogs, cats, users, user, error } = this.state;
-    if (dogs !== null) {
+    const { pets, users, user, error } = this.state;
+    if (pets !== null) {
       return (
         <div>
           <section>
@@ -87,8 +65,8 @@ export default class AdoptionPage extends Component {
             <section>
               <h2>Dogs</h2>
               <Adopt
-                pets={dogs}
-                adopt={this.deleteDog}
+                pets={pets}
+                adopt={this.deletePet}
                 user={user}
                 error={error}
               />
@@ -97,8 +75,8 @@ export default class AdoptionPage extends Component {
             <section>
               <h2>Cats</h2>
               <Adopt
-                pets={cats}
-                adopt={this.deleteCat}
+                pets={pets}
+                adopt={this.deletePet}
                 user={user}
                 error={error}
               />

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 export default class Adopt extends Component{
+
     state = {
       index: 0,
     }
@@ -24,8 +25,8 @@ export default class Adopt extends Component{
       let adopt = this.props.adopt;
       let user = this.props.user;
       let error = this.props.error;
-      
-      if(pets.length > 0 && user === 'Jim Lahey'){
+      console.log(pets)
+      if(pets.length > 0){
 
         return(
           <div>
@@ -38,11 +39,7 @@ export default class Adopt extends Component{
             <p> Sex: {pets[index].sex}</p>       
             <p> Breed: {pets[index].breed}</p>       
             <p> Age: {pets[index].age}</p>       
-            <p> Story: {pets[index].story}</p>
-
-            {index !== 0 && <button onClick={this.back}>See Previous</button>}   
-            {index === 0 && <button onClick={() => adopt()}>Adopt</button>}  
-            {index < pets.length - 1 && <button onClick={this.next}>See Next</button>}
+            <p> Story: {pets[index].story}</p> 
 
           </div>
         );
@@ -62,9 +59,6 @@ export default class Adopt extends Component{
             <p> Breed: {pets[index].breed}</p>       
             <p> Age: {pets[index].age}</p>       
             <p> Story: {pets[index].story}</p>
-  
-            {index !== 0 && <button onClick={this.back}>See Previous</button>}   
-            {index < pets.length - 1 && <button onClick={this.next}>See Next</button>}
   
           </div>
         );

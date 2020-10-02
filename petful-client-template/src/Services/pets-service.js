@@ -1,13 +1,13 @@
 import config from '../config';
 
-const dogsApiService = {
-  getDogs() {
-    return fetch(`${config.API_ENDPOINT}/pets/dog`)
+const petsApiService = {
+  getPets() {
+    return fetch(`${config.API_ENDPOINT}/pets`)
       .then(res =>
         !res.ok ? res.json().then(e => Promise.reject(e)) : res.json());
   },
-  deleteDogs(){
-    return fetch(`${config.API_ENDPOINT}/pets/dog`, {
+  deletePets(){
+    return fetch(`${config.API_ENDPOINT}/pets`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'
@@ -17,4 +17,4 @@ const dogsApiService = {
   }
 };
 
-export default dogsApiService;
+export default petsApiService;
