@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Route, NavLink } from "react-router-dom";
-import AdoptionPage from "./AdoptionPage.js/AdoptionPage";
+import Header from "../Header/Header"
+import AdoptionPage from "./AdoptionPage/AdoptionPage";
 import LandingPage from "./LandingPage/LandingPage";
 
 export default class App extends Component {

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Users from "../Users/Users"
+import Adopt from "../Adopt/Adopt"
 import dogsApiService from "../Services/dogs-service";
 import catsApiService from "../Services/cats-service";
 import usersApiService from "../Services/users-service";
