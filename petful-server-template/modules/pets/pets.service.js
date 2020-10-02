@@ -21,6 +21,6 @@ module.exports = {
 
   dequeue(type) {
     // Remove a pet from the queue.
-    return [pets.cats.dequeue(), pets.dogs.dequeue()];
+    return pets[type].dequeue()
   }
 }
