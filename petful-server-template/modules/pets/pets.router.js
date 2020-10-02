@@ -13,6 +13,7 @@ router.get("/", (req, res) => {
 
 router.delete("/", json, (req, res) => {
   // Remove a pet from adoption.
+  
 
   return res.status(204).end();
 });

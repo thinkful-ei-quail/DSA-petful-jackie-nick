@@ -20,7 +20,6 @@ module.exports = {
     if ( person !== null) {
       people.enqueue(person);
     }
-    throw new Error('Must enter name.');
   },
   dequeue() {
     // Remove a person from the queue.
