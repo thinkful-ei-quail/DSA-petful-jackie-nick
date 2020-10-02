@@ -55,8 +55,7 @@ class Queue {
       node = node.next
     }
     return array
-    // console.log(this.data)
-    // return this.data
+    
   }
 }
 
