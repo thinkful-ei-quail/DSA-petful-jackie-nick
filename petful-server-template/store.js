@@ -9,7 +9,7 @@ module.exports = {
     {
       age: 3,
       breed: 'Golden Retriever',
-      description: 'A smiling golden-brown golden retreiver listening to music.',
+      description: 'A smiling golden-brown golden retriever listening to music.',
       gender: 'Male',
       imageURL: 'https://images.pexels.com/photos/33053/dog-young-dog-small-dog-maltese.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500',
       name: 'Zim',
@@ -58,7 +58,7 @@ module.exports = {
 
     {
       imageURL: 'https://images.pexels.com/photos/551628/pexels-photo-551628.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-      description: 'A smiling golden-brown golden retreiver listening to music.',
+      description: 'A smiling golden-brown golden retriever listening to music.',
       name: 'Zeke',
       gender: 'Male',
       age: 3,
@@ -69,7 +69,7 @@ module.exports = {
     {
       age: 3,
       breed: 'Golden Retriever',
-      description: 'A smiling golden-brown golden retreiver listening to music.',
+      description: 'A smiling golden-brown golden retriever listening to music.',
       gender: 'Male',
       imageURL: 'https://images.pexels.com/photos/1490908/pexels-photo-1490908.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500',
       name: 'Sam',
@@ -99,11 +99,11 @@ module.exports = {
     {
       age: 3,
       breed: 'Golden Retriever',
-      description: 'A smiling golden-brown golden retreiver',
+      description: 'A smiling golden-brown golden retriever',
       gender: 'Male',
       imageURL: 'https://images.pexels.com/photos/92380/pexels-photo-92380.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500',
       name: 'Tom',
-      story: 'Owner surrrendered dog'
+      story: 'Owner surrendered dog'
     },
 
     {
