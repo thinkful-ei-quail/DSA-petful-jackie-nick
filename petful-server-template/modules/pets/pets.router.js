@@ -3,6 +3,7 @@ const json = require("body-parser").json();
 
 const Pets = require("./pets.service");
 const People = require("../people/people.service");
+const petsService = require("./pets.service");
 
 const router = express.Router();
 
@@ -13,8 +14,7 @@ router.get("/", (req, res) => {
 
 router.delete("/", json, (req, res) => {
   // Remove a pet from adoption.
-  
-
+ 
   return res.status(204).end();
 });
 
