@@ -23,6 +23,7 @@ class Queue {
     if (this.last) {
       this.last.next = node;
     }
+    node.next = null
     this.last = node;
   }
 
@@ -44,10 +45,15 @@ class Queue {
     return this.first.data
   }
   
-  all(queue) {
+  all() {
     // Return all items in the queue.
     let array = []
-    array.push(this.queue.toString())
+    let node = this.first
+    while(node !== null) {
+      console.log(node)
+      array.push(node.data)
+      node = node.next
+    }
     return array
     // console.log(this.data)
     // return this.data

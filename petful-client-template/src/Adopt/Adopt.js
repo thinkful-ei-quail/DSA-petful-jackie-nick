@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import './adoptable.css';
-
 
 export default class Adopt extends Component{
-
     state = {
       index: 0,
     }

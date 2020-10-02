@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
 router.post('/', json, (req, res) => {
   // Add a new person to the queue.
   People.enqueue(People.dequeue());
-  res.status(200).json(People.get(people))
+  res.status(200).json(People.get(person))
 })
 
 module.exports = router

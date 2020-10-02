@@ -76,7 +76,7 @@ export default class AdoptionPage extends Component {
 
   render() {
     const { dogs, cats, users, user, error } = this.state;
-    if (cats !== null) {
+    if (dogs !== null) {
       return (
         <div>
           <section>
