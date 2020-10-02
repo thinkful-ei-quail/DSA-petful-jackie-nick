@@ -12,8 +12,12 @@ router.get('/', (req, res) => {
 
 router.post('/', json, (req, res) => {
   // Add a new person to the queue.
-  People.enqueue(People.dequeue());
-  res.status(200).json(People.get(person))
+  const person = req.body
+  People.enqueue(person);
+  then(data => {
+    res.status(200).json(People.get())
+  })
+  console.log(person)
 })
 
 module.exports = router
