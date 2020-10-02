@@ -13,11 +13,9 @@ module.exports = {
   get() {
     // Return all people in the queue.
   },
-
   enqueue(person) {
     // Add a person to the queue.
   },
-
   dequeue() {
     // Remove a person from the queue.
   }
