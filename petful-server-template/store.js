@@ -1,8 +1,8 @@
 module.exports = {
   people: [
-    'Randy Lahey',
-    'Trevor Cory',
-    'Jim Lahey'
+    {person:'Randy Lahey'},
+    {person:'Trevor Cory'},
+    {person:'Jim Lahey'}
   ],
 
   dogs: [
