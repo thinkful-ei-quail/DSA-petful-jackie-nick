@@ -21,44 +21,42 @@ export default class Adopt extends Component{
     render(){
 
       const { index } = this.state;
-      let pets = this.props.pets;
+      let dogs = this.props.dogs;
+      let cats = this.props.cats;
       let adopt = this.props.adopt;
       let user = this.props.user;
       let error = this.props.error;
-      console.log(pets)
-      if(pets.length > 0){
-
+      if(cats){
         return(
           <div>
             <img
-              src={pets[index].imageURL}
-              alt={pets[index].imageDescription}
+              src={cats.imageURL}
+              alt={cats.imageDescription}
             />
-            <p> Description: {pets[index].imageDescription}</p>  
-            <p> Name: {pets[index].name}</p>  
-            <p> Sex: {pets[index].sex}</p>       
-            <p> Breed: {pets[index].breed}</p>       
-            <p> Age: {pets[index].age}</p>       
-            <p> Story: {pets[index].story}</p> 
-
+            <p> Description: {cats.imageDescription}</p>  
+            <p> Name: {cats.name}</p>  
+            <p> Sex: {cats.sex}</p>       
+            <p> Breed: {cats.breed}</p>       
+            <p> Age: {cats.age}</p>       
+            <p> Story: {cats.story}</p> 
           </div>
         );
           
       }
 
-      else if(pets.length !== 0){
+      else if(dogs){
         return(
           <div>
             <img
-              src={pets[index].imageURL}
-              alt={pets[index].imageDescription}
+              src={dogs.imageURL}
+              alt={dogs.imageDescription}
             />
-            <p> Description: {pets[index].imageDescription}</p>  
-            <p> Name: {pets[index].name}</p>  
-            <p> Sex: {pets[index].sex}</p>       
-            <p> Breed: {pets[index].breed}</p>       
-            <p> Age: {pets[index].age}</p>       
-            <p> Story: {pets[index].story}</p>
+            <p> Description: {dogs.imageDescription}</p>  
+            <p> Name: {dogs.name}</p>  
+            <p> Sex: {dogs.sex}</p>       
+            <p> Breed: {dogs.breed}</p>       
+            <p> Age: {dogs.age}</p>       
+            <p> Story: {dogs.story}</p>
   
           </div>
         );

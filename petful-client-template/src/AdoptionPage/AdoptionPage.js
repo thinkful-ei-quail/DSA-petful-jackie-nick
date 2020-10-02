@@ -6,6 +6,8 @@ import usersApiService from "../Services/users-service";
 
 export default class AdoptionPage extends Component {
   state = {
+    cats: {},
+    dogs: {},
     pets: [],
     users: [],
     user: {},
@@ -17,7 +19,8 @@ export default class AdoptionPage extends Component {
       .getPets()
       .then((res) => {
         this.setState({
-          pets: res,
+          cats: res.cats,
+          dogs: res.dogs
         });
       })
       .catch((res) => this.setState({ error: res.message }));
@@ -25,7 +28,7 @@ export default class AdoptionPage extends Component {
     usersApiService.getUsers().then((res) => {
       this.setState({
         users: res,
-        user: res[0].name,
+        user: res.person,
       });
     });
 
@@ -44,7 +47,7 @@ export default class AdoptionPage extends Component {
   }
   deletePet = () => {
     petsApiService.deletePets();
-    let updatedPets = [...this.state.Pets];
+    let updatedPets = [...this.state.pets];
     updatedPets.shift();
     this.updateUser();
     this.setState({
@@ -53,8 +56,9 @@ export default class AdoptionPage extends Component {
   };
 
   render() {
-    const { pets, users, user, error } = this.state;
-    if (pets !== null) {
+    const { cats, dogs, users, user, error } = this.state;
+    console.log(cats)
+    if (0 === 0) {
       return (
         <div>
           <section>
@@ -65,7 +69,7 @@ export default class AdoptionPage extends Component {
             <section>
               <h2>Dogs</h2>
               <Adopt
-                pets={pets}
+                dogs={dogs}
                 adopt={this.deletePet}
                 user={user}
                 error={error}
@@ -75,7 +79,7 @@ export default class AdoptionPage extends Component {
             <section>
               <h2>Cats</h2>
               <Adopt
-                pets={pets}
+                cats={cats}
                 adopt={this.deletePet}
                 user={user}
                 error={error}
