@@ -33,9 +33,9 @@ export default class Adopt extends Component{
               src={cats.imageURL}
               alt={cats.imageDescription}
             />
-            <p> Description: {cats.imageDescription}</p>  
+            <p> Description: {cats.description}</p>  
             <p> Name: {cats.name}</p>  
-            <p> Sex: {cats.sex}</p>       
+            <p> Sex: {cats.gender}</p>       
             <p> Breed: {cats.breed}</p>       
             <p> Age: {cats.age}</p>       
             <p> Story: {cats.story}</p> 
@@ -51,9 +51,9 @@ export default class Adopt extends Component{
               src={dogs.imageURL}
               alt={dogs.imageDescription}
             />
-            <p> Description: {dogs.imageDescription}</p>  
+            <p> Description: {dogs.description}</p>  
             <p> Name: {dogs.name}</p>  
-            <p> Sex: {dogs.sex}</p>       
+            <p> Sex: {dogs.gender}</p>       
             <p> Breed: {dogs.breed}</p>       
             <p> Age: {dogs.age}</p>       
             <p> Story: {dogs.story}</p>

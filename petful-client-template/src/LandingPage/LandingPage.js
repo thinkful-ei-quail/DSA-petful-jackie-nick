@@ -1,22 +1,24 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
+import dogscats from '../Images/dogscats.jpg'
+import './landingpage.css'
 
 export default class LandingPage extends Component {
   render() {
     return(
         <div>
-          <div>
+          <div className="centerimage"><img className="landingpageImage" src={dogscats} alt="dogs and cats cartoon"/></div>
+          <div className="landingpageBody">
             <p>
-              Welcome to FIFO Animal shelter! Some fancy words will go here that tell you all about our adoption process, and what to do.
+              Welcome to FIFO Animal shelter! Our beautiful, loving animals have been waiting for a beautiful soul like you to come bring them into a loving home and spoil the for the rest of their days.
             </p>
             <p>
-              It's pretty simple. You click on the button and look through the animals. When you're ready, jump in line and when you're next, you can adopt either the next cat or dog avaliable.
-            </p>
-            <p>
-              Yo Nick, I think we need to replace all the images with like, cujo type dogs and wolves, and mountain lions and pumas. :) Horror show type stuff. And give them really cute names like fluffy and princess.
+              Our adoption process is pretty simple. Click on the adopt button to check out the next dog and cat waiting to be adopted. When you're ready, jump in line and when you're next, you can adopt either the next cat or dog available.
             </p>
           </div>
-            <Link to='/adoption-page'>Adopt Now!</Link>
+          <div className="button">
+            <Link to='/adoption-page'><button>Adopt Now!</button></Link>
+            </div>
         </div>
     )
   }
