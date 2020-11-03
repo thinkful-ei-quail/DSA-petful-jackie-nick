@@ -12,16 +12,11 @@ router.get("/", (req, res) => {
   const pets = Pets.get()
   res.status(200).json(pets);
 });
-
-router.delete("/cat", json, (req, res) => {
-  // Remove a pet from adoption.
- let cat = Pets.dequeue('cats')
-  return res.status(204).end();
-});
-router.delete("/dog", json, (req, res) => {
-  // Remove a pet from adoption.
- let dog = Pets.dequeue('dogs')
-  return res.status(204).end();
+router.delete('/', json, (req, res) => {
+  const { type } = req.body;
+  Pets.dequeue(type).then((pet) => {
+    res.status(204).json(pet);
+  });
 });
 
 router.get("/cat", (req, res) => {

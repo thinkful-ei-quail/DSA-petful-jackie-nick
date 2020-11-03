@@ -11,18 +11,15 @@ store.people.forEach(person => people.enqueue(person))
 
 module.exports = {
   get() {
-    // Return all people in the queue.
-    return people.all()
+    return Promise.resolve(people.all());
+  },
 
-  },
   enqueue(person) {
-    // Add a person to the queue.
-    if ( person !== null) {
-      people.enqueue(person);
-    }
+    people.enqueue(person);
+    return Promise.resolve();
   },
-  dequeue(person) {
-    // Remove a person from the queue.
-    people.dequeue(person);
-  }
-}
+
+  dequeue() {
+    return Promise.resolve(people.dequeue());
+  },
+};
