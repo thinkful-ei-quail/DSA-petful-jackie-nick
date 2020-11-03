@@ -1,6 +1,6 @@
 const express = require('express')
 const json = require('body-parser').json()
-const store = require('../../store')
+const store = require('../store')
 const People = require('./people.service')
 const router = express.Router()
 
