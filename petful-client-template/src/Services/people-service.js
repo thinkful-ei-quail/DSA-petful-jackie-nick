@@ -1,23 +1,23 @@
 import config from '../config';
 
-const usersApiService = { 
-  getUsers() {
+const peopleApiService = { 
+  getPeople() {
     return fetch(`${config.API_ENDPOINT}/people`)
       .then(res =>
         !res.ok ? res.json().then(e => Promise.reject(e)) : res.json());
   },
-  postUsers(data){
-    let user ={name:data}
+  postPeople(data){
+    let name ={name:data}
     return fetch(`${config.API_ENDPOINT}/people`, {
       method: 'POST',
       headers: {'content-type': 'application/json'},
-      body: JSON.stringify(user)
+      body: JSON.stringify(name)
     })
     .then((res) =>
-    !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
+    !res.ok ? res.json().then((e) => Promise.reject(e)) : Promise.resolve('')
   );
   },
-  deleteUser() {
+  deletePeople() {
     return fetch(`${config.API_ENDPOINT}/people`, {
       method: 'DELETE',
       headers: {
@@ -29,4 +29,4 @@ const usersApiService = {
   }
 };
 
-export default usersApiService;
+export default peopleApiService;

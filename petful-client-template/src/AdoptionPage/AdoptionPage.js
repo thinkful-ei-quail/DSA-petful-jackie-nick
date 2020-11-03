@@ -1,17 +1,21 @@
 import React, { Component } from "react";
-import Users from "../Users/Users";
+import "./adoptionpage.css";
+import People from "../People/People";
 import Adopt from "../Adopt/Adopt";
 import petsApiService from "../Services/pets-service";
-import usersApiService from "../Services/users-service";
+import peopleApiService from "../Services/people-service";
+import Trigger from "../TakeHome/Trigger";
+import TakeHome from "../TakeHome/TakeHome";
 
 export default class AdoptionPage extends Component {
   state = {
     cats: [],
     dogs: [],
-    pets: [],
-    users: [],
-    currentUser: "",
+    people: [],
+    confirm: false,
+    currentPerson: "",
     nextInLine: "",
+    added: false,
     error: {},
   };
 
@@ -26,79 +30,76 @@ export default class AdoptionPage extends Component {
       })
       .catch((res) => this.setState({ error: res.message }));
 
-    usersApiService.getUsers().then((res) => {
+    peopleApiService.getPeople().then((res) => {
       this.setState({
-        users: res,
-        user: res.person,
+        people: res,
+        nextInLine: res[0],
       });
     });
-
-    this.interval = setInterval(() => {
-      this.handleInterval();
+    setInterval(() => {
+      this.handleDemo();
     }, 5000);
   }
-  updateUser() {
-    usersApiService.postUsers().then((res) => {
-      this.setState({
-        users: res,
-        user: res[0].name,
-      });
-    });
-  }
-  deleteDog = () => {
-    petsApiService.deleteDog();
-    let updatedDogs = [...this.state.dogs];
-    updatedDogs.shift();
-    this.updateUser();
-    this.setState({
-      dogs: updatedDogs,
-    });
-  };
-  deleteCat = () => {
-    petsApiService.deleteCat();
-    let updatedCats = [...this.state.cats];
-    updatedCats.shift();
-    this.updateUser();
-    this.setState({
-      cats: updatedCats,
-    });
-  };
-  adoptDog = (option) => {
-    if (option === "both") {
-      this.adoptPet("both");
-    } else {
-      this.adoptPet("dogs");
-    }
-  };
 
-  adoptCat = (option) => {
-    if (option === "both") {
-      this.adoptPet("both");
-    } else {
-      this.adoptPet("cats");
-    }
+  adoptCat = () => {
+    petsApiService.deletePets("cat");
+    const people = this.state.people;
+    const cats = this.state.cats;
+    cats.shift();
+    people.shift();
+    this.setState({
+      people: people,
+      cats: cats,
+      confirm: true,
+      nextInLine: people[0],
+      currentUser: "",
+      added:false,
+    });
+  };
+  adoptDog = () => {
+    petsApiService.deletePets("dog");
+    const people = this.state.people;
+    const dogs = this.state.dogs;
+    dogs.shift();
+    people.shift();
+    this.setState({
+      people: people,
+      dogs: dogs,
+      confirm: true,
+      nextInLine: people[0],
+      currentUser: "",
+      added:false,
+    });
   };
   handleAddPerson = (e) => {
     e.preventDefault();
     const { name } = e.target;
-    usersApiService.postUsers(name.value).then((res) => {
-      console.log(res);
+      if(name.value === '') {
+         alert("Name must be valid")
+         return null
+      }
+    const people = this.state.people;
+    peopleApiService.postPeople(name.value).then(() => {
+      people.push(name.value);
       this.setState({
-        currentUser: name.value,
+        people: people,
+        currentPerson: name.value,
+        added: true,
       });
     });
-    console.log(this.state.currentUser);
   };
-  handleInterval() {
-    const users = this.state.users;
-    const cats = this.state.cats;
-    const dogs = this.state.dogs;
 
-    const currentUser = this.state.currentUser;
+  handleDemo() {
+    let people = this.state.people;
+    let cats = this.state.cats;
+    let dogs = this.state.dogs;
+    const currentPerson = this.state.currentPerson;
     let nextInLine = this.state.nextInLine;
-
-    if (nextInLine === currentUser) {
-      if (users.length < 4) {
+    if (people.length === 0) {
+      clearInterval(this.intervalId);
+    }
+    if (nextInLine === currentPerson) {
+      if (people.length < 5) {
         const random = [
           "Cheddar Bob",
           "Billy Bob",
@@ -106,67 +107,77 @@ export default class AdoptionPage extends Component {
           "Uncle Bob",
           "What about Bob",
         ];
-        let randomPerson = random[Math.floor(Math.random() * 4)];
-        usersApiService.postUsers(randomPerson).then(() => {
-          users.push(randomPerson);
-          this.setState({ users: users });
+        let i = Math.floor(Math.random() * 5);
+        peopleApiService.postPeople(random[i]).then(() => {
+          people.push(random[i]);
+          this.setState({ people: people });
         });
       }
-    } else if (users.length > 0) {
-      const petType = users.length % 2 === 0 ? "cats" : "dogs";
-      petsApiService.deletePet(petType).then(() => {
-        if (petType === "cats") {
+    } else if (nextInLine !== currentPerson && this.state.added === true) {
+      const pet = people.length % 2 === 0 ? "cats" : "dogs";
+      petsApiService.deletePets(pet);
+      peopleApiService.deletePeople().then(() => {
+        if (pet === "cats") {
           cats.shift();
-        } else {
+        }
+        if (pet === "dogs") {
           dogs.shift();
         }
-        users.shift();
-
+        people.shift();
         this.setState({
-          users: users,
+          people: people,
           cats: cats,
           dogs: dogs,
-          nextInLine: users[0],
+          nextInLine: people[0],
         });
       });
     }
   }
+
   render() {
-    const { cats, dogs, users, user, error } = this.state;
-    console.log(this.state.people);
+    const { cats, dogs, nextInLine, people, error, currentPerson } = this.state;
+    console.log(cats);
     if (cats) {
       return (
-        <div>
-          <section>
-            <Users users={users} />
-          </section>
-          <form className="nameForm" onSubmit={this.handleAddPerson}>
-            <label htmlFor="adoptForm">Name</label>
-            <input name="name" type="text" />
-            <button type="submit">Get In Line</button>
-          </form>
-
+        <div className="mainContainer">
+          <ol>
+            <People people={people} />
+          </ol>
+          {!this.state.added && (
+            <form className="nameForm" onSubmit={this.handleAddPerson}>
+              <label htmlFor="adoptForm">Name</label>
+              <input name="name" type="text" />
+              <button type="submit">Get In Line</button>
+            </form>
+          )}
           <div>
             <section>
               <h2>Dogs</h2>
-              <Adopt
-                dogs={dogs}
-                adopt={this.deleteDog}
-                adopt={this.adoptDog}
-                user={user}
-                error={error}
-              />
+              {dogs.length > 0 ? (
+                <Adopt
+                  dogs={dogs[0]}
+                  adoptDog={this.adoptDog}
+                  error={error}
+                  currentPerson={currentPerson}
+                  nextInLine={nextInLine}
+                />
+              ) : (
+                <h2>No dogs to adopt</h2>
+              )}
             </section>
-
             <section>
               <h2>Cats</h2>
-              <Adopt
-                cats={cats}
-                adopt={this.deleteCat}
-                adopt={this.adoptCat}
-                user={user}
-                error={error}
-              />
+              {cats.length > 0 ? (
+                <Adopt
+                  cats={cats[0]}
+                  adoptCat={this.adoptCat}
+                  error={error}
+                  currentPerson={currentPerson}
+                  nextInLine={nextInLine}
+                />
+              ) : (
+                <h2>No cats to adopt</h2>
+              )}
             </section>
           </div>
         </div>
